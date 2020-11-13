@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  fibo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:5000"
+    environment:
+      - MEMCACHED_HOST=memcached
+      - MEMCACHED_PORT=11211
+    depends_on:
+      - memcached
+  memcached:
+    image: memcached:1.6.8
+    expose:
+      - "11211"
